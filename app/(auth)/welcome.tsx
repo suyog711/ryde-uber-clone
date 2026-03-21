@@ -2,7 +2,7 @@ import CustomButton from "@/components/CustomButton";
 import { onboarding } from "@/constants";
 import { router } from "expo-router";
 import { useRef, useState } from "react";
-import { Image, Text, TouchableOpacity, View } from "react-native";
+import { Image, Pressable, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import Swiper from "react-native-swiper";
 const Onboarding = () => {
@@ -12,12 +12,12 @@ const Onboarding = () => {
 
   return (
     <SafeAreaView className="flex h-full items-center justify-between  bg-white">
-      <TouchableOpacity
+      <Pressable
         onPress={() => router.replace("/(auth)/sign-up")}
         className="w-full flex justify-end items-end p-5"
       >
         <Text className="text-black text-md font-JakartaBold">Skip</Text>
-      </TouchableOpacity>
+      </Pressable>
       <Swiper
         ref={swiperRef}
         loop={false}
@@ -54,7 +54,7 @@ const Onboarding = () => {
             ? router.replace("/(auth)/sign-up")
             : swiperRef.current?.scrollBy(1)
         }
-        className="w-11/12 mt-10"
+        className="w-5/6 mt-10"
       />
     </SafeAreaView>
   );

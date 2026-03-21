@@ -1,4 +1,4 @@
-import { TextInputProps, TouchableOpacityProps } from "react-native";
+import { PressableProps, TextInputProps } from "react-native";
 
 declare interface Driver {
   driver_id: number;
@@ -53,7 +53,7 @@ declare interface Ride {
   };
 }
 
-declare interface ButtonProps extends TouchableOpacityProps {
+declare interface ButtonProps extends PressableProps {
   title: string;
   bgVariant?: "primary" | "secondary" | "danger" | "outline" | "success";
   textVariant?: "primary" | "default" | "secondary" | "danger" | "success";
