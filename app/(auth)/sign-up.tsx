@@ -2,6 +2,7 @@ import CustomButton from "@/components/CustomButton";
 import InputField from "@/components/InputField";
 import OAuth from "@/components/OAuth";
 import { icons, images } from "@/constants";
+import { fetchAPI } from "@/lib/fetch";
 import { useAuth, useSignUp } from "@clerk/expo";
 import { Link, router } from "expo-router";
 import { useState } from "react";
@@ -46,7 +47,7 @@ const SignUp = () => {
     if (signUp.status === "complete") {
       await signUp.finalize({
         // Redirect the user to the home page after signing up
-        navigate: ({ session, decorateUrl }) => {
+        navigate: async ({ session, decorateUrl }) => {
           if (session?.currentTask) {
             // Handle pending session tasks
             // See https://clerk.com/docs/guides/development/custom-flows/authentication/session-tasks
@@ -54,6 +55,14 @@ const SignUp = () => {
             return;
           }
           //create database user
+          await fetchAPI("/(api)/user", {
+            method: "POST",
+            body: JSON.stringify({
+              name: form.name,
+              email: form.email,
+              clerkId: session?.user?.id,
+            }),
+          });
           setVerification({ ...verification, state: "success" });
         },
       });
